@@ -48,5 +48,5 @@ jobs:
         - name: Deploy to Minikube
           run: |
             # Run kubectl commands like deploy, get pods, etc.
-            kubectl apply -f k8s/deployment.yaml
+            kubectl apply -f ./deployment.yaml
             kubectl get pods
