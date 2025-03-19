@@ -29,11 +29,24 @@ jobs:
       runs-on: ubuntu-latest
       steps:
         - uses: actions/checkout@v4
-        - uses: azure/setup-kubectl@v3
-          with:
-            version: 'latest'
-        - name: Déployer sur Kubernetes
+
+        - name: Set up Minikube
           run: |
-            kubectl set image deployment/coldspot.com coldspot.com=coldman47/crv-ci_cd:latest --record
-          env:
-            KUBECONFIG: ${{ secrets.KUBECONFIG }}
+            # Install Minikube and kubectl
+            curl -Lo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64 && sudo chmod +x minikube && sudo mv minikube /usr/local/bin/
+            curl -LO https://dl.k8s.io/release/v1.23.0/bin/linux/amd64/kubectl && sudo chmod +x kubectl && sudo mv kubectl /usr/local/bin/
+
+            # Start Minikube with Docker driver
+            minikube start --driver=docker
+
+        - name: Set kubectl context
+          run: |
+            # Set kubeconfig for kubectl to use Minikube's
+            echo $(minikube kubectl -- get kubeconfig) > ~/.kube/config
+
+        # Step 4: Deploy to Minikube
+        - name: Deploy to Minikube
+          run: |
+            # Run kubectl commands like deploy, get pods, etc.
+            kubectl apply -f k8s/deployment.yaml
+            kubectl get pods
