@@ -53,7 +53,7 @@ jobs:
           run: |
             # Run kubectl commands like deploy, get pods, etc.
             kubectl apply -f ./deployment.yml
-            sleep 5
+            sleep 15
             kubectl apply -f ./service.yml
         
          # Step 5: Verify the deployment (optional)
