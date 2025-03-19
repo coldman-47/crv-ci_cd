@@ -49,6 +49,8 @@ jobs:
 
         # Step 4: Deploy to Minikube
         - name: Deploy to Minikube
+          env:
+              KUBECONFIG: ${{ secrets.KUBECONFIG }}
           run: |
             # Run kubectl commands like deploy, get pods, etc.
             kubectl apply -f ./deployment.yaml
