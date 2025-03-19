@@ -43,7 +43,7 @@ jobs:
         - name: Set kubectl context
           run: |
             # Set kubeconfig for kubectl to use Minikube's
-            echo $(minikube kubectl -- get kubeconfig) > ~/.kube/config
+            echo $(kubectl config view) > ~/.kube/config
 
         # Step 4: Deploy to Minikube
         - name: Deploy to Minikube
