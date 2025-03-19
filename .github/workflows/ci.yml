@@ -23,17 +23,17 @@ jobs:
         run: |
           docker tag coldman47/crv-ci_cd:${{ github.sha }} coldman47/crv-ci_cd:latest
           docker push coldman47/crv-ci_cd:latest
-          
-deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: azure/setup-kubectl@v3
-        with:
-          version: 'latest'
-      - name: Déployer sur Kubernetes
-        run: |
-          kubectl set image deployment/hello-world-node hello-world-node=yourusername/hello-world-node:latest --record
-        env:
-          KUBECONFIG: ${{ secrets.KUBECONFIG }}
+
+  deploy:
+      needs: build
+      runs-on: ubuntu-latest
+      steps:
+        - uses: actions/checkout@v4
+        - uses: azure/setup-kubectl@v3
+          with:
+            version: 'latest'
+        - name: Déployer sur Kubernetes
+          run: |
+            kubectl set image deployment/hello-world-node hello-world-node=yourusername/hello-world-node:latest --record
+          env:
+            KUBECONFIG: ${{ secrets.KUBECONFIG }}
