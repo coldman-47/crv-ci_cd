@@ -14,9 +14,33 @@ Avant de commencer, vous devez avoir les éléments suivants installés sur votr
 
 ## Étapes d'installation
 
+### 1. Créer un cluster Minikube
 
 Une fois installé, vous pouvez démarrer Minikube avec la commande suivante :
 
 ```bash
 minikube start
+```
 
+Ensuite créer le déploiement avec la commande suivante:
+
+```bash
+kubectl apply -f deployment.yml
+```
+
+Créer ensuite le service en éxécutant la commande suivante:
+
+```bash
+kubectl apply -f service.yml
+```
+
+Accèder au dashbaord de *Minikube* avec la commande suivante:
+
+```bash
+minikube dashboard
+```
+
+Pour tester l'application, saisir la commande ci-après dans le terminal:
+
+```bash
+minikube service crv-cicd
