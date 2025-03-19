@@ -53,12 +53,9 @@ jobs:
           run: |
             # Run kubectl commands like deploy, get pods, etc.
             kubectl apply -f ./deployment.yml
-
-        - name: Déployer sur Kubernetes
-          run: |
-            kubectl set image deployment/coldspot.com coldspot.com=coldman47/crv-ci_cd:latest --record
         
          # Step 5: Verify the deployment (optional)
         - name: Check Pods in Kubernetes
           run: |
+            kubectl get deployments
             kubectl get pods
