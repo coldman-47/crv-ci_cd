@@ -43,14 +43,15 @@ jobs:
         - name: Set kubectl context
           run: |
             kubectl config use-context minikube
+            kubectl cluster-info
             cat ~/.kube/config
             # Set kubeconfig for kubectl to use Minikube's
-            echo $(kubectl config view) > ~/.kube/config
+            # echo $(kubectl config view) > ~/.kube/config
 
         # Step 4: Deploy to Minikube
         - name: Deploy to Minikube
-          env:
-              KUBECONFIG: ${{ secrets.KUBECONFIG }}
+          # env:
+          #     KUBECONFIG: ${{ secrets.KUBECONFIG }}
           run: |
             # Run kubectl commands like deploy, get pods, etc.
             kubectl apply -f ./deployment.yaml
