@@ -54,7 +54,7 @@ jobs:
           #     KUBECONFIG: ${{ secrets.KUBECONFIG }}
           run: |
             # Run kubectl commands like deploy, get pods, etc.
-            kubectl apply -f ./deployment.yaml
+            kubectl apply -f ../../deployment.yaml
         
          # Step 5: Verify the deployment (optional)
         - name: Check Pods in Kubernetes
