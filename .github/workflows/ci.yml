@@ -38,12 +38,20 @@ jobs:
 
             # Start Minikube with Docker driver
             minikube start --driver=docker
-            
-        - uses: azure/setup-kubectl@v3
-          with:
-            version: 'latest'
-        - name: Déployer sur Kubernetes
+            minikube status
+
+        - name: Set kubectl context
           run: |
-            kubectl set image deployment/coldspot.com coldspot.com=coldman47/crv-ci_cd:latest --record
-          env:
-            KUBECONFIG: ${{ secrets.KUBECONFIG }}
+            # Set kubeconfig for kubectl to use Minikube's
+            echo $(minikube kubectl -- get kubeconfig) > ~/.kube/config
+
+        # Step 4: Deploy to Minikube
+        - name: Deploy to Minikube
+          run: |
+            # Run kubectl commands like deploy, get pods, etc.
+            kubectl apply -f ./deployment.yaml
+        
+         # Step 5: Verify the deployment (optional)
+        - name: Check Pods in Kubernetes
+          run: |
+            kubectl get pods
