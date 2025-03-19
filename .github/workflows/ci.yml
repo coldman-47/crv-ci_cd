@@ -61,3 +61,4 @@ jobs:
             kubectl get deployments
             kubectl get svc
             kubectl get pods
+            minikube service crv-cicd
