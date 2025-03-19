@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: coldspot.com
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: crv-ci_cd
+  template:
+    metadata:
+      labels:
+        app: crv-ci_cd
+    spec:
+      containers:
+        - name: crv-cicd
+          image: coldman47/crv-ci_cd:latest
+          ports:
+            - containerPort: 80

@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: crv-cicd
+spec:
+  selector:
+    app: crv-ci_cd
+  ports:
+    - port: 80
+      targetPort: 80
+  type: LoadBalancer
