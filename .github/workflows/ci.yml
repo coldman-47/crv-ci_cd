@@ -42,6 +42,7 @@ jobs:
 
         - name: Set kubectl context
           run: |
+            kubectl config use-context minikube
             # Set kubeconfig for kubectl to use Minikube's
             echo $(kubectl config view) > ~/.kube/config
 
